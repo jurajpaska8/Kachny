@@ -4,14 +4,14 @@ import models.abstractions.GameCard;
 
 public class WaterCard extends GameCard
 {
-    private static final int WATER_COUNT = 5;
-
     @Override
     public String toString()
     {
-        return "Water";
+        return this.getClass().getSimpleName();
     }
-    private boolean moveAfterAbsorbingShoot()
+
+    @Override
+    protected boolean moveAfterAbsorbingShoot()
     {
         return false;
     }

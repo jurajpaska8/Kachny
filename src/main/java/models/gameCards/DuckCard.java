@@ -6,9 +6,7 @@ import models.abstractions.GameCard;
 
 public class DuckCard extends GameCard
 {
-    private static final int DUCK_CARD_COUNT_EACH_PLAYER = 5;
-    private final Player player; // TODO from class
-    private int health = 5; // TODO from class
+    private final Player player;
 
     public DuckCard(Player player)
     {
@@ -19,11 +17,6 @@ public class DuckCard extends GameCard
     public String toString()
     {
         return "Duck: " + player.getName();
-    }
-
-    private boolean moveAfterAbsorbingShoot() // TODO to ifc
-    {
-        return true;
     }
 
     @Override
