@@ -1,5 +1,7 @@
 package models;
 
+import decks.ActionCardDeck;
+import decks.GameCardDeck;
 import exceptions.EmptyDeckException;
 import exceptions.EmptyHealthBarException;
 import exceptions.NotPlayableCardException;

@@ -1,6 +1,6 @@
 import exceptions.IllegalCountOfPlayersException;
-import models.ActionCardDeck;
-import models.GameCardDeck;
+import decks.ActionCardDeck;
+import decks.GameCardDeck;
 import models.Player;
 import models.Pond;
 
@@ -91,8 +91,8 @@ public class Main
             while(!isOnlyOnePlayerAlive)
             {
                 printPlayers(players);
-                printActionDeck(actionCards);
-                printGameCard(gameCards);
+                // printActionDeck(actionCards); // For debug
+                // printGameCard(gameCards);  // For debug
                 for(var player : players)
                 {
                     if(player.isDead())

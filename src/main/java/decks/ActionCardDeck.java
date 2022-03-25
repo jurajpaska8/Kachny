@@ -1,15 +1,15 @@
-package models;
+package decks;
 
 import exceptions.EmptyDeckException;
 import models.abstractions.ActionCard;
-import models.abstractions.ICardDeck;
-import models.actionCards.movementCards.DuckDanceCard;
-import models.actionCards.movementCards.DuckMarchCard;
-import models.actionCards.movementCards.RosamboCard;
-import models.actionCards.movementCards.TurboDuckCard;
-import models.actionCards.shootingCards.AimCard;
-import models.actionCards.shootingCards.ShootCard;
-import models.actionCards.shootingCards.WildBillCard;
+import models.abstractions.interfaces.ICardDeck;
+import cards.actionCards.movementCards.DuckDanceCard;
+import cards.actionCards.movementCards.DuckMarchCard;
+import cards.actionCards.movementCards.RosamboCard;
+import cards.actionCards.movementCards.TurboDuckCard;
+import cards.actionCards.shootingCards.AimCard;
+import cards.actionCards.shootingCards.ShootCard;
+import cards.actionCards.shootingCards.WildBillCard;
 
 import java.util.Collections;
 import java.util.LinkedList;

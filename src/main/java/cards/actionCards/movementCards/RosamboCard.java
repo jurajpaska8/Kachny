@@ -1,8 +1,8 @@
-package models.actionCards.movementCards;
+package cards.actionCards.movementCards;
 
 import exceptions.NotPlayableCardException;
-import models.ActionCardDeck;
-import models.GameCardDeck;
+import decks.ActionCardDeck;
+import decks.GameCardDeck;
 import models.Pond;
 import models.abstractions.MovementActionCard;
 

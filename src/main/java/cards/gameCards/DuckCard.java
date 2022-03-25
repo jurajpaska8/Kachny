@@ -1,4 +1,4 @@
-package models.gameCards;
+package cards.gameCards;
 
 import exceptions.EmptyHealthBarException;
 import models.Player;

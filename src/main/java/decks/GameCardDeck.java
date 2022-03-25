@@ -1,11 +1,12 @@
-package models;
+package decks;
 
 import exceptions.EmptyDeckException;
 import exceptions.IllegalCountOfPlayersException;
+import models.Player;
 import models.abstractions.GameCard;
-import models.abstractions.ICardDeck;
-import models.gameCards.DuckCard;
-import models.gameCards.WaterCard;
+import models.abstractions.interfaces.ICardDeck;
+import cards.gameCards.DuckCard;
+import cards.gameCards.WaterCard;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -42,11 +43,11 @@ public class GameCardDeck implements ICardDeck
     private List<GameCard> initGameCards(List<Player> playerList, int ducksCardPerPlayer, int waterCard)
     {
         List<GameCard> gameCardList = new LinkedList<>();
-        for(int i = 0; i < playerList.size(); i++)
+        for(Player player : playerList)
         {
             for(int j = 0; j < ducksCardPerPlayer; j++)
             {
-                gameCardList.add(new DuckCard(playerList.get(i)));
+                gameCardList.add(new DuckCard(player));
             }
         }
 

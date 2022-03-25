@@ -1,5 +1,6 @@
 package models;
 
+import decks.GameCardDeck;
 import exceptions.EmptyDeckException;
 import exceptions.FieldAlreadyAimedException;
 import exceptions.FieldNotAimedException;

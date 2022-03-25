@@ -1,6 +1,7 @@
-package models.abstractions;
+package models.abstractions.interfaces;
 
 import exceptions.EmptyDeckException;
+import models.abstractions.Card;
 
 public interface ICardDeck
 {

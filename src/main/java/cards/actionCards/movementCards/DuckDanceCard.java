@@ -1,16 +1,16 @@
-package models.actionCards.movementCards;
+package cards.actionCards.movementCards;
 
 import exceptions.NotPlayableCardException;
-import models.ActionCardDeck;
-import models.GameCardDeck;
+import decks.ActionCardDeck;
+import decks.GameCardDeck;
 import models.Pond;
 import models.abstractions.MovementActionCard;
 
 import java.util.Scanner;
 
-public class TurboDuckCard extends MovementActionCard
+public class DuckDanceCard extends MovementActionCard
 {
-    public static final String CARD_DESC = "Posuňte ľubovoľnú kačku na políčko najviac v predu rybníka. Kačky, ktoré predbehla, posuňte o jedno miesto dozadu.";
+    public static final String CARD_DESC = "Zoberte karty z rybníka a zamiešajte ich s balíčkom s kačicami. Potom vyložte nových 6 kariet do rybníka";
 
     @Override
     public void doAction(Pond pond, GameCardDeck gameCardDeck, ActionCardDeck actionCardDeck, Scanner scanner) throws NotPlayableCardException
