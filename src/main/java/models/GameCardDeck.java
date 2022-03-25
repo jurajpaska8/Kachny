@@ -15,17 +15,17 @@ public class GameCardDeck implements ICardDeck
 {
     private final static int MIN_PLAYER_COUNT = 2;
     private final static int MAX_PLAYER_COUNT = 6;
-    private final int playerCount;
     private final List<GameCard> gameCardDeck;
+    private final List<Player> playerList;
 
-    public GameCardDeck(int playerCount, int ducksCardPerPlayer, int waterCard) throws IllegalCountOfPlayersException
+    public GameCardDeck(List<Player> playerList, int ducksCardPerPlayer, int waterCard) throws IllegalCountOfPlayersException
     {
-        if(!isPlayerCountInRange(playerCount))
+        if(!isPlayerCountInRange(playerList.size()))
         {
-            throw new IllegalArgumentException("Illegal count of players ( " + playerCount + " ). Allowed count of players: [" + MIN_PLAYER_COUNT + ", " + MAX_PLAYER_COUNT + "]");
+            throw new IllegalArgumentException("Illegal count of players ( " + playerList.size() + " ). Allowed count of players: [" + MIN_PLAYER_COUNT + ", " + MAX_PLAYER_COUNT + "]");
         }
-        this.playerCount = playerCount;
-        this.gameCardDeck = initGameCards(playerCount, ducksCardPerPlayer, waterCard);
+        this.playerList = playerList;
+        this.gameCardDeck = initGameCards(playerList, ducksCardPerPlayer, waterCard);
         this.shuffle();
     }
 
@@ -39,15 +39,14 @@ public class GameCardDeck implements ICardDeck
         return playerCount >= MIN_PLAYER_COUNT && playerCount <= MAX_PLAYER_COUNT;
     }
 
-    private List<GameCard> initGameCards(int playerCount, int ducksCardPerPlayer, int waterCard)
+    private List<GameCard> initGameCards(List<Player> playerList, int ducksCardPerPlayer, int waterCard)
     {
         List<GameCard> gameCardList = new LinkedList<>();
-        for(int i = 0; i < playerCount; i++)
+        for(int i = 0; i < playerList.size(); i++)
         {
-            var player = "player" + i;
             for(int j = 0; j < ducksCardPerPlayer; j++)
             {
-                gameCardList.add(new DuckCard(player));
+                gameCardList.add(new DuckCard(playerList.get(i)));
             }
         }
 

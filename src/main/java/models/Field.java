@@ -42,4 +42,10 @@ public class Field
         isAimed = false;
         return gameCard.absorbShoot();
     }
+
+    public boolean useWildBill()
+    {
+        isAimed = false;
+        return gameCard.absorbShoot();
+    }
 }

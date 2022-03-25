@@ -21,17 +21,14 @@ public class Pond
         }
     }
 
-    public Field[] getFieldsInPond()
-    {
-        return fieldsInPond;
-    }
-
     public void printPond()
     {
+        System.out.println("***** POND *****");
         for(int i = 0; i < POND_SIZE; i++)
         {
-            System.out.println("Is aimed: " + fieldsInPond[i].isAimed() + ": " + fieldsInPond[i].getGameCard());
+            System.out.println("Idx: '" + i + "' .Is aimed: " + fieldsInPond[i].isAimed() + ": " + fieldsInPond[i].getGameCard());
         }
+        System.out.println("****************");
     }
 
     public void initPond(GameCardDeck gameCardDeck)
@@ -72,7 +69,7 @@ public class Pond
         fieldsInPond[idx].aimOnField();
     }
 
-    public void shootOnField(int idx) throws IndexOutOfBoundsException, FieldNotAimedException
+    public void shootOnField(int idx, GameCardDeck gameCardDeck) throws IndexOutOfBoundsException, FieldNotAimedException
     {
         if(idx < 0 || idx >= POND_SIZE)
         {
@@ -80,16 +77,35 @@ public class Pond
         }
         if(fieldsInPond[idx].shootOnField())
         {
-            moveCardsToLeft(idx);
+            moveCardsToLeft(idx, gameCardDeck);
         }
     }
 
-    private void moveCardsToLeft(int idx)
+    public void useWildBill(int idx, GameCardDeck gameCardDeck) throws IndexOutOfBoundsException
     {
-        for(int i = idx; i < POND_SIZE - 2; i++)
+        if(idx < 0 || idx >= POND_SIZE)
         {
-            fieldsInPond[i].setGameCard(fieldsInPond[i+1].getGameCard());
+            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (POND_SIZE - 1) + "]");
         }
-        fieldsInPond[POND_SIZE - 1].setGameCard(null);
+        if(fieldsInPond[idx].useWildBill())
+        {
+            moveCardsToLeft(idx, gameCardDeck);
+        }
+    }
+
+    private void moveCardsToLeft(int idx, GameCardDeck gameCardDeck)
+    {
+        try
+        {
+            for(int i = idx; i < POND_SIZE - 1; i++)
+            {
+                fieldsInPond[i].setGameCard(fieldsInPond[i + 1].getGameCard());
+            }
+            fieldsInPond[POND_SIZE - 1].setGameCard(gameCardDeck.popCard());
+        }
+        catch(EmptyDeckException e)
+        {
+            System.err.println("Deck is empty. It is not possible to add new card on the last position after move to left. Message:" + e.getMessage());
+        }
     }
 }

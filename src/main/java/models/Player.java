@@ -1,21 +1,24 @@
 package models;
 
 import exceptions.EmptyDeckException;
+import exceptions.NotPlayableCardException;
 import jdk.jshell.spi.ExecutionControl;
 import models.abstractions.ActionCard;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player
 {
-    private String name;
-    private int life = 5;
+    private final String name;
+    private int health;
     private final List<ActionCard> playerActionCards;
 
-    public Player(String name)
+    public Player(String name, int health)
     {
         this.name = name;
+        this.health = health;
         playerActionCards = new LinkedList<>();
     }
 
@@ -50,11 +53,43 @@ public class Player
         }
     }
 
-    public void playCard(ActionCardDeck actionCardDeck)
+    void printPlayerActionCards()
     {
-        // TODO implement pick
-        var card = playerActionCards.get(0);
-        playerActionCards.remove(0);
-        actionCardDeck.getActionCardDeck().add(card);
+        System.out.println("* Player: '" + name + "' is choosing card:");
+        for(var i = 0; i < playerActionCards.size(); i++)
+        {
+            System.out.println("** idx: '" + i + "' " + playerActionCards.get(i).getCardDescription());
+        }
     }
+
+    public void playCard(ActionCardDeck actionCardDeck, Pond pond, GameCardDeck gameCardDeck, Scanner scanner)
+    {
+        try
+        {
+            printPlayerActionCards();
+            var idx = scanner.nextInt();
+            // TODO edge cases
+            var card = playerActionCards.get(idx);
+            card.doAction(pond, gameCardDeck, scanner);
+            playerActionCards.remove(idx);
+            actionCardDeck.getActionCardDeck().add(card);
+        }
+        catch(NotPlayableCardException e)
+        {
+            System.err.println("Card is not playable.");
+            playCard(actionCardDeck, pond, gameCardDeck, scanner);
+        }
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
+
+    public void decreaseHealth()
+    {
+        // TODO exception ?
+        this.health--;
+    }
+
 }
