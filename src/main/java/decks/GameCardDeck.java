@@ -14,10 +14,9 @@ import java.util.List;
 
 public class GameCardDeck implements ICardDeck
 {
-    private final static int MIN_PLAYER_COUNT = 2;
-    private final static int MAX_PLAYER_COUNT = 6;
+    public final static int MIN_PLAYER_COUNT = 2;
+    public final static int MAX_PLAYER_COUNT = 6;
     private final List<GameCard> gameCardDeck;
-    private final List<Player> playerList;
 
     public GameCardDeck(List<Player> playerList, int ducksCardPerPlayer, int waterCard) throws IllegalCountOfPlayersException
     {
@@ -25,7 +24,6 @@ public class GameCardDeck implements ICardDeck
         {
             throw new IllegalArgumentException("Illegal count of players ( " + playerList.size() + " ). Allowed count of players: [" + MIN_PLAYER_COUNT + ", " + MAX_PLAYER_COUNT + "]");
         }
-        this.playerList = playerList;
         this.gameCardDeck = initGameCards(playerList, ducksCardPerPlayer, waterCard);
         this.shuffle();
     }
