@@ -80,15 +80,14 @@ public class Player
                 System.out.println("You can not play any card. Choose one card to throw.");
                 idx = scanner.nextInt();
                 actionCardDeck.getActionCardDeck().add(playerActionCards.get(idx));
-                playerActionCards.remove(idx);
             }
             else
             {
                 idx = scanner.nextInt();
                 var card = playerActionCards.get(idx);
                 card.doAction(pond, gameCardDeck, actionCardDeck, scanner);
-                playerActionCards.remove(idx);
             }
+            playerActionCards.remove(idx);
         }
         catch(NotPlayableCardException e)
         {

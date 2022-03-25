@@ -51,7 +51,7 @@ public class Main
             System.out.println("Toto je kachna");
             var scanner = new Scanner(new InputStreamReader(System.in));
             // game cards
-            var playersCount = 2;
+            var playersCount = 2; // TODO configurable
             var ducksPerPlayer = 5;
             var waterCount = 5;
             var pondSize = 6;
@@ -113,7 +113,7 @@ public class Main
         }
         catch(IllegalCountOfPlayersException e)
         {
-            e.printStackTrace();
+            System.out.println("Not allowed count of players. Message: " + e.getMessage());
         }
     }
 }
