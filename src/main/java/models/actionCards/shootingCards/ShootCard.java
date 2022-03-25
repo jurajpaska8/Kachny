@@ -1,6 +1,5 @@
 package models.actionCards.shootingCards;
 
-import exceptions.FieldAlreadyAimedException;
 import exceptions.FieldNotAimedException;
 import exceptions.NotPlayableCardException;
 import models.ActionCardDeck;

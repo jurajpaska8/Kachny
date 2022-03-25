@@ -1,7 +1,7 @@
 package models.actionCards.shootingCards;
 
-import exceptions.NotPlayableCardException;
 import exceptions.FieldAlreadyAimedException;
+import exceptions.NotPlayableCardException;
 import models.ActionCardDeck;
 import models.GameCardDeck;
 import models.Pond;
