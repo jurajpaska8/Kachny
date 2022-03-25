@@ -23,7 +23,7 @@ public class ShootCard extends ShootingActionCard
     @Override
     public void doAction(Pond pond, GameCardDeck gameCardDeck, ActionCardDeck actionCardDeck, Scanner scanner) throws NotPlayableCardException
     {
-        if(pond.isAllFieldsNotAimed()) // TODO from method
+        if(!isPlayable(pond))
         {
             throw new NotPlayableCardException("No field is aimed. You can not use shoot card");
         }
