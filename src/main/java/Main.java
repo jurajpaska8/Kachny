@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main
 {
@@ -35,6 +36,12 @@ public class Main
         {
             System.out.println(card.toString());
         }
+    }
+
+    private static boolean isLastAlive(Player player, List<Player> playerList)
+    {
+        var alivePlayers = playerList.stream().filter(p -> !p.isDead()).collect(Collectors.toList());
+        return alivePlayers.size() == 1 && alivePlayers.get(0).getName().equals(player.getName());
     }
 
     public static void main(String[] args)
@@ -72,29 +79,36 @@ public class Main
             }
 
             // game deck
-            var gameCards = new GameCardDeck(players, ducksPerPlayer, waterCount); //TODO inject players
-
+            var gameCards = new GameCardDeck(players, ducksPerPlayer, waterCount);
 
             // pond
             Pond pond = new Pond();
             pond.initPond(gameCards);
 
 
-            var rounds = 5;
-            for(int i = 0; i < rounds; i++)
+            var isOnlyOnePlayerAlive = false;
+            while(!isOnlyOnePlayerAlive)
             {
                 printPlayers(players);
                 printActionDeck(actionCards);
                 printGameCard(gameCards);
                 for(var player : players)
                 {
+                    if(player.isDead())
+                    {
+                        continue;
+                    }
+                    if(isLastAlive(player, players))
+                    {
+                        System.out.println("Player: '" + player.getName() + "' WON THE GAME!!!");
+                        isOnlyOnePlayerAlive = true;
+                        break;
+                    }
                     pond.printPond();
                     player.playCard(actionCards, pond, gameCards, scanner);
                     player.takeCardFromDeck(actionCards);
                 }
             }
-            
-            System.out.println("");
         }
         catch(IllegalCountOfPlayersException e)
         {

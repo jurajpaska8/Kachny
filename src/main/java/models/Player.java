@@ -1,8 +1,8 @@
 package models;
 
 import exceptions.EmptyDeckException;
+import exceptions.EmptyHealthBarException;
 import exceptions.NotPlayableCardException;
-import jdk.jshell.spi.ExecutionControl;
 import models.abstractions.ActionCard;
 
 import java.util.LinkedList;
@@ -62,21 +62,42 @@ public class Player
         }
     }
 
+    private boolean isAtLeastOneCardPlayable(Pond pond)
+    {
+        return playerActionCards
+                .stream()
+                .anyMatch(c -> c.isPlayable(pond));
+    }
+
     public void playCard(ActionCardDeck actionCardDeck, Pond pond, GameCardDeck gameCardDeck, Scanner scanner)
     {
+        int idx = -1;
         try
         {
             printPlayerActionCards();
-            var idx = scanner.nextInt();
-            // TODO edge cases
-            var card = playerActionCards.get(idx);
-            card.doAction(pond, gameCardDeck, scanner);
-            playerActionCards.remove(idx);
-            actionCardDeck.getActionCardDeck().add(card);
+            if(!isAtLeastOneCardPlayable(pond))
+            {
+                System.out.println("You can not play any card. Choose one card to throw.");
+                idx = scanner.nextInt();
+                actionCardDeck.getActionCardDeck().add(playerActionCards.get(idx));
+                playerActionCards.remove(idx);
+            }
+            else
+            {
+                idx = scanner.nextInt();
+                var card = playerActionCards.get(idx);
+                card.doAction(pond, gameCardDeck, actionCardDeck, scanner);
+                playerActionCards.remove(idx);
+            }
         }
         catch(NotPlayableCardException e)
         {
             System.err.println("Card is not playable.");
+            playCard(actionCardDeck, pond, gameCardDeck, scanner);
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            System.err.println("Card with index: '" + idx + "' is out of range [0 ," + (playerActionCards.size() - 1) + "].");
             playCard(actionCardDeck, pond, gameCardDeck, scanner);
         }
     }
@@ -86,9 +107,17 @@ public class Player
         return health;
     }
 
-    public void decreaseHealth()
+    public boolean isDead()
     {
-        // TODO exception ?
+        return health <= 0;
+    }
+
+    public void decreaseHealth() throws EmptyHealthBarException
+    {
+        if(health <= 0)
+        {
+            throw new EmptyHealthBarException("Fatal error: Health bar is already empty. Something weird is going on in application");
+        }
         this.health--;
     }
 

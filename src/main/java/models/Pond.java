@@ -108,4 +108,13 @@ public class Pond
             System.err.println("Deck is empty. It is not possible to add new card on the last position after move to left. Message:" + e.getMessage());
         }
     }
+
+    public boolean isAimed(int idx) throws IndexOutOfBoundsException
+    {
+        if(idx < 0 || idx >= POND_SIZE)
+        {
+            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (POND_SIZE - 1) + "]");
+        }
+        return fieldsInPond[idx].isAimed();
+    }
 }
