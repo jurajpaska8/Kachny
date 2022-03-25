@@ -27,7 +27,7 @@ public class ShootCard extends ShootingActionCard
         {
             throw new NotPlayableCardException("No field is aimed. You can not use shoot card");
         }
-        System.out.println("Choose field index to shoot. Indices: [0," + (Pond.POND_SIZE - 1) + "]:");
+        System.out.println("Choose field index to shoot. Indices: [0," + (pond.getPondSize() - 1) + "]:");
         var idx = scanner.nextInt();
         try
         {

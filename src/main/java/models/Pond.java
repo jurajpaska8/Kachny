@@ -8,23 +8,28 @@ import java.util.Arrays;
 
 public class Pond
 {
-    public static final int POND_SIZE = 6; // TODO outside
-
+    private final int pondSize;
     private Field[] fieldsInPond;
 
-    public Pond()
+    public Pond(int pondSize)
     {
-        this.fieldsInPond = new Field[POND_SIZE];
-        for(var i = 0; i < POND_SIZE; i++)
+        this.pondSize = pondSize;
+        this.fieldsInPond = new Field[pondSize];
+        for(var i = 0; i < pondSize; i++)
         {
             this.fieldsInPond[i] = new Field();
         }
     }
 
+    public int getPondSize()
+    {
+        return pondSize;
+    }
+
     public void printPond()
     {
         System.out.println("***** POND *****");
-        for(int i = 0; i < POND_SIZE; i++)
+        for(int i = 0; i < pondSize; i++)
         {
             System.out.println("Idx: '" + i + "' .Is aimed: " + fieldsInPond[i].isAimed() + ": " + fieldsInPond[i].getGameCard());
         }
@@ -35,7 +40,7 @@ public class Pond
     {
         try
         {
-            for(var i = 0; i < POND_SIZE; i++)
+            for(var i = 0; i < pondSize; i++)
             {
                 fieldsInPond[i].setGameCard(gameCardDeck.popCard());
             }
@@ -62,18 +67,18 @@ public class Pond
 
     public void aimOnField(int idx) throws IndexOutOfBoundsException, FieldAlreadyAimedException
     {
-        if(idx < 0 || idx >= POND_SIZE)
+        if(idx < 0 || idx >= pondSize)
         {
-            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (POND_SIZE - 1) + "]");
+            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (pondSize - 1) + "]");
         }
         fieldsInPond[idx].aimOnField();
     }
 
     public void shootOnField(int idx, GameCardDeck gameCardDeck) throws IndexOutOfBoundsException, FieldNotAimedException
     {
-        if(idx < 0 || idx >= POND_SIZE)
+        if(idx < 0 || idx >= pondSize)
         {
-            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (POND_SIZE - 1) + "]");
+            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (pondSize - 1) + "]");
         }
         if(fieldsInPond[idx].shootOnField())
         {
@@ -83,9 +88,9 @@ public class Pond
 
     public void useWildBill(int idx, GameCardDeck gameCardDeck) throws IndexOutOfBoundsException
     {
-        if(idx < 0 || idx >= POND_SIZE)
+        if(idx < 0 || idx >= pondSize)
         {
-            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (POND_SIZE - 1) + "]");
+            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (pondSize - 1) + "]");
         }
         if(fieldsInPond[idx].useWildBill())
         {
@@ -97,11 +102,11 @@ public class Pond
     {
         try
         {
-            for(int i = idx; i < POND_SIZE - 1; i++)
+            for(int i = idx; i < pondSize - 1; i++)
             {
                 fieldsInPond[i].setGameCard(fieldsInPond[i + 1].getGameCard());
             }
-            fieldsInPond[POND_SIZE - 1].setGameCard(gameCardDeck.popCard());
+            fieldsInPond[pondSize - 1].setGameCard(gameCardDeck.popCard());
         }
         catch(EmptyDeckException e)
         {
@@ -111,9 +116,9 @@ public class Pond
 
     public boolean isAimed(int idx) throws IndexOutOfBoundsException
     {
-        if(idx < 0 || idx >= POND_SIZE)
+        if(idx < 0 || idx >= pondSize)
         {
-            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (POND_SIZE - 1) + "]");
+            throw new IndexOutOfBoundsException("Index: " + idx + " is out of range. In field are indices from: [0," + (pondSize - 1) + "]");
         }
         return fieldsInPond[idx].isAimed();
     }

@@ -26,7 +26,7 @@ public class AimCard extends ShootingActionCard
         {
             throw new NotPlayableCardException("You can not choose aim card. All fields are aimed");
         }
-        System.out.println("Choose field index to aim. Indices: [0," + (Pond.POND_SIZE - 1) + "]:");
+        System.out.println("Choose field index to aim. Indices: [0," + (pond.getPondSize() - 1) + "]:");
         var idx = scanner.nextInt();
         try
         {

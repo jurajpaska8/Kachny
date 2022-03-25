@@ -54,6 +54,7 @@ public class Main
             var playersCount = 2;
             var ducksPerPlayer = 5;
             var waterCount = 5;
+            var pondSize = 6;
 
             // action cards - move
             var duckMarchCardCount = 6;
@@ -82,7 +83,7 @@ public class Main
             var gameCards = new GameCardDeck(players, ducksPerPlayer, waterCount);
 
             // pond
-            Pond pond = new Pond();
+            Pond pond = new Pond(pondSize);
             pond.initPond(gameCards);
 
 

@@ -1,7 +1,5 @@
 package models.actionCards.shootingCards;
 
-import exceptions.FieldNotAimedException;
-import exceptions.NotPlayableCardException;
 import models.ActionCardDeck;
 import models.GameCardDeck;
 import models.Pond;
@@ -17,7 +15,7 @@ public class WildBillCard extends ShootingActionCard
     public void doAction(Pond pond, GameCardDeck gameCardDeck, ActionCardDeck actionCardDeck, Scanner scanner)
     {
         {
-            System.out.println("Choose field index to use WildBill. Indices: [0," + (Pond.POND_SIZE - 1) + "]:");
+            System.out.println("Choose field index to use WildBill. Indices: [0," + (pond.getPondSize() - 1) + "]:");
             var idx = scanner.nextInt();
             try
             {
